@@ -1,4 +1,4 @@
-function renderBoard(selector, size) {
+function renderBoard(size) {
     const cellSize = 100 / size;
 
     // sugeneruojame baltai-juodu langeliu serija
@@ -25,9 +25,7 @@ function renderBoard(selector, size) {
                     style="height: ${cellSize}%;">${cells}</div>`;
     }
 
-    const DOM = document.querySelector(selector);
-
-    DOM.innerHTML = HTML;
+    return HTML;
 }
 
 export { renderBoard }

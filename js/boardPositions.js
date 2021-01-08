@@ -6,8 +6,8 @@ const boardPositions = [
     { x: 4, y: 0, type: 'king', color: 'white' },
     { x: 5, y: 0, type: 'bishop', color: 'white' },
     { x: 6, y: 0, type: 'knight', color: 'white' },
-
     { x: 7, y: 0, type: 'rook', color: 'white' },
+
     { x: 0, y: 1, type: 'pawn', color: 'white' },
     { x: 1, y: 1, type: 'pawn', color: 'white' },
     { x: 2, y: 1, type: 'pawn', color: 'white' },
@@ -16,7 +16,6 @@ const boardPositions = [
     { x: 5, y: 1, type: 'pawn', color: 'white' },
     { x: 6, y: 1, type: 'pawn', color: 'white' },
     { x: 7, y: 1, type: 'pawn', color: 'white' },
-    { x: 0, y: 0, type: 'rook', color: 'white' },
 
     { x: 0, y: 6, type: 'pawn', color: 'black' },
     { x: 1, y: 6, type: 'pawn', color: 'black' },

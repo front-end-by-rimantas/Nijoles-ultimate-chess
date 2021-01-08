@@ -9,6 +9,8 @@ function renderPieces(selector, boardPositions, pieces) {
         const type = piece.type;
 
         pieceDOM.innerHTML = pieces[color][type];
+        pieceDOM.dataset.team = color;
+        pieceDOM.dataset.type = type;
     }
 }
 
