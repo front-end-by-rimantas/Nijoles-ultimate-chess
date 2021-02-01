@@ -51,15 +51,6 @@ body * {
 .board .row > .cell.trans {
     background-color: transparent;
 }
-.board .row > .cell.selected {
-    background-color: aqua;
-}
-.board .row > .cell.free {
-    border: 5px solid green;
-}
-.board .row > .cell.attack {
-    border: 5px solid red;
-}
 
 .board > .layer.figures > .figure {
     display: inline-block;
@@ -68,4 +59,13 @@ body * {
     position: absolute;
     top: 0;
     left: 0;
+}
+.board .figure.selected {
+    background-color: aqua;
+}
+.board .figure.free {
+    border: 5px solid green;
+}
+.board .figure.attack {
+    border: 5px solid red;
 }

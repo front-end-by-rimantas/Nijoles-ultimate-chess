@@ -6,6 +6,7 @@ class Figure {
         this.y = params.y;
         this.type = params.type;
         this.color = params.color;
+        this.selected = false;
 
         this.parentDOM = parentDOM;
         this.DOM = null;
@@ -27,6 +28,25 @@ class Figure {
         this.parentDOM.insertAdjacentHTML('beforeend', HTML);
 
         this.DOM = this.parentDOM.querySelector(`#${id}`);
+    }
+
+    select() {
+        this.selected = true;
+        this.DOM.classList.add('selected');
+        this.showAvailableMoves();
+    }
+
+    deselect() {
+        this.selected = false;
+        this.DOM.classList.remove('selected');
+    }
+
+    showAvailableMoves() {
+
+    }
+
+    move(x, y) {
+
     }
 }
 

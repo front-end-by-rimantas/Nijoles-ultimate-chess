@@ -15,6 +15,7 @@ class ChessGame {
         this.DOMclicks = null;
 
         this.figures = [];
+        this.lastSelectedFigure = null;
     }
 
     init() {
@@ -81,15 +82,55 @@ class ChessGame {
 
         for (const cell of allCells) {
             cell.addEventListener('click', () => {
-                const coordinates = {
-                    x: +cell.dataset.x,
-                    y: +cell.closest('.row').dataset.y
-                }
+                const x = +cell.dataset.x;
+                const y = +cell.closest('.row').dataset.y;
 
-                console.log(coordinates);
+                this.cellClick(x, y);
             })
         }
     }
+
+    cellClick(x, y) {
+        const figure = this.figures.filter(figure => figure.x === x && figure.y === y)[0];
+
+        if (figure) {
+            // paspaudeme ant figuros
+            if (this.lastSelectedFigure) {
+                if (this.lastSelectedFigure.color === figure.color) {
+                    // turejome pasirinkta figura, todel keiciame pasirinkima
+                } else {
+                    // turejome pasirinkta figura, todel ja kertame
+                }
+            } else {
+                // pasirenkame figura
+                return;
+            }
+        } else {
+            // paspaudeme ant tuscio langelio
+            if (this.lastSelectedFigure) {
+                // turejome pasirinkta figura, todel ja perkeliame
+            } else {
+                return;
+            }
+        }
+
+        // if (figure.selected) {
+        //     this.lastSelectedFigure = null;
+        //     figure.deselect();
+        // } else {
+        //     if (this.lastSelectedFigure) {
+        //         this.lastSelectedFigure.deselect();
+        //     }
+        //     this.lastSelectedFigure = figure;
+        //     figure.select();
+        // }
+    }
+
+    selectFigure() { }
+    deselectFigure() { }
+    selectAnotherFigure() { }
+    moveFigure() { }
+    moveAndAttackFigure() { }
 }
 
 export { ChessGame }
