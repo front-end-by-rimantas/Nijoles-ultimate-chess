@@ -94,43 +94,65 @@ class ChessGame {
         const figure = this.figures.filter(figure => figure.x === x && figure.y === y)[0];
 
         if (figure) {
-            // paspaudeme ant figuros
             if (this.lastSelectedFigure) {
+                if (figure.x === this.lastSelectedFigure.x &&
+                    figure.y === this.lastSelectedFigure.y) {
+                    this.deselectFigure();
+                    return;
+                }
+
                 if (this.lastSelectedFigure.color === figure.color) {
-                    // turejome pasirinkta figura, todel keiciame pasirinkima
+                    this.selectAnotherFigure(figure);
                 } else {
-                    // turejome pasirinkta figura, todel ja kertame
+                    this.moveAndAttackFigure(figure);
                 }
             } else {
-                // pasirenkame figura
+                this.selectFigure(figure);
                 return;
             }
         } else {
-            // paspaudeme ant tuscio langelio
             if (this.lastSelectedFigure) {
-                // turejome pasirinkta figura, todel ja perkeliame
+                this.moveFigure(x, y);
             } else {
                 return;
             }
         }
-
-        // if (figure.selected) {
-        //     this.lastSelectedFigure = null;
-        //     figure.deselect();
-        // } else {
-        //     if (this.lastSelectedFigure) {
-        //         this.lastSelectedFigure.deselect();
-        //     }
-        //     this.lastSelectedFigure = figure;
-        //     figure.select();
-        // }
     }
 
-    selectFigure() { }
-    deselectFigure() { }
-    selectAnotherFigure() { }
-    moveFigure() { }
-    moveAndAttackFigure() { }
+    selectFigure(figure) {
+        // niekas nepasirinkta ir paspaudem ant figuros
+        this.lastSelectedFigure = figure;
+        figure.select();
+    }
+    deselectFigure() {
+        // pasirinkta figura ir dar karta ant jos paspaudem, tai nuzymim
+        this.lastSelectedFigure.deselect();
+        this.lastSelectedFigure = null;
+    }
+    selectAnotherFigure(figure) {
+        // pasirinkta figura ir paspaudem ant savo kitos, tai tiesiog perkeliam pazymejima
+        this.lastSelectedFigure.deselect();
+        this.lastSelectedFigure = figure;
+        figure.select();
+    }
+    moveFigure(x, y) {
+        // pazymetos figuros perkelimas i tuscia langeli
+        this.lastSelectedFigure.move(x, y);
+        this.lastSelectedFigure.deselect();
+        this.lastSelectedFigure = null;
+    }
+    moveAndAttackFigure(figure) {
+        // pazymetos figuros perkelimas i langeli su priesingos spalvos figura
+        // kirtimas - prieso pasalinimas
+        const { x, y } = figure;
+        figure.remove();
+        this.figures = this.figures.filter(figure => figure.x !== x || figure.y !== y);
+
+        // perkelimas (saves)
+        this.lastSelectedFigure.move(x, y);
+        this.lastSelectedFigure.deselect();
+        this.lastSelectedFigure = null;
+    }
 }
 
 export { ChessGame }

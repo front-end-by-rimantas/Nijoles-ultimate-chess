@@ -46,7 +46,17 @@ class Figure {
     }
 
     move(x, y) {
+        this.x = x;
+        this.y = y;
+        const top = this.y * 12.5;
+        const left = this.x * 12.5;
 
+        this.DOM.style.top = top + '%';
+        this.DOM.style.left = left + '%';
+    }
+
+    remove() {
+        this.DOM.remove();
     }
 }
 
