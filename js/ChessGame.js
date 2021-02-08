@@ -1,7 +1,7 @@
 import { renderBoard } from './renderBoard.js';
 import { boardPositions } from './boardPositions.js';
-import { pieces } from './pieces.js';
 import { Figure } from './Figure.js';
+import { King } from './King.js';
 
 class ChessGame {
     constructor(params) {
@@ -10,9 +10,10 @@ class ChessGame {
         this.boardSize = 8;
 
         this.DOM = null;
-        this.DOMcells = null;
-        this.DOMfigures = null;
-        this.DOMclicks = null;
+        this.DOMcells = null;           // pirmasis sluoksnis
+        this.allDOMcells = null;        // pirmame sluoksnyje esantys langeliai
+        this.DOMfigures = null;         // antrasis sluoksnis
+        this.DOMclicks = null;          // treciasis sluoksnis
 
         this.figures = [];
         this.lastSelectedFigure = null;
@@ -25,6 +26,7 @@ class ChessGame {
 
         this.addLayers();
         this.DOMcells.innerHTML = renderBoard(this.boardSize);
+        this.allDOMcells = this.DOMcells.querySelectorAll('.cell');
         this.createFigures();
         this.createClicksLayer();
     }
@@ -57,7 +59,15 @@ class ChessGame {
 
     createFigures() {
         for (const figure of boardPositions) {
-            this.figures.push(new Figure(figure, this.DOMfigures));
+            switch (figure.type) {
+                case 'king':
+                    this.figures.push(new King(this, figure, this.DOMfigures));
+                    break;
+
+                default:
+                    this.figures.push(new Figure(this, figure, this.DOMfigures));
+                    break;
+            }
         }
     }
 

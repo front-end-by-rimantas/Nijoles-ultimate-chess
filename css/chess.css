@@ -63,9 +63,9 @@ body * {
 .board .figure.selected {
     background-color: aqua;
 }
-.board .figure.free {
+.board .cell.free {
     border: 5px solid green;
 }
-.board .figure.attack {
+.board .cell.attack {
     border: 5px solid red;
 }
