@@ -15,13 +15,12 @@ class King extends Figure {
                 const posibleY = this.y + y;
 
                 // tikriname, jog langelis yra lentos ribose
-                if (posibleX < 0 || posibleY < 0 || posibleX >= this.GAME.boardSize || posibleY >= this.GAME.boardSize) {
+                if (!this.isValidCoordinate(posibleX, posibleY)) {
                     continue;
                 }
 
                 // tikriname, ar galimas aplinkinis langelis yra tuscias
-                const cellContent = this.GAME.figures
-                    .filter(figure => figure.x === posibleX && figure.y === posibleY)[0];
+                const cellContent = this.cellContent(posibleX, posibleY);
 
                 if (!cellContent) {
                     freeCells.push({

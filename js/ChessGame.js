@@ -1,7 +1,8 @@
 import { renderBoard } from './renderBoard.js';
 import { boardPositions } from './boardPositions.js';
-import { Figure } from './Figure.js';
-import { King } from './King.js';
+import { Figure } from './figures/Figure.js';
+import { King } from './figures/King.js';
+import { Pawn } from './figures/Pawn.js';
 
 class ChessGame {
     constructor(params) {
@@ -62,6 +63,9 @@ class ChessGame {
             switch (figure.type) {
                 case 'king':
                     this.figures.push(new King(this, figure, this.DOMfigures));
+                    break;
+                case 'pawn':
+                    this.figures.push(new Pawn(this, figure, this.DOMfigures));
                     break;
 
                 default:

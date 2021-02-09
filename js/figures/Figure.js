@@ -1,4 +1,4 @@
-import { pieces } from './pieces.js';
+import { pieces } from '../pieces.js';
 
 class Figure {
     constructor(GAME, params, parentDOM) {
@@ -8,6 +8,7 @@ class Figure {
         this.type = params.type;
         this.color = params.color;
         this.selected = false;
+        this.moveCount = 0;
 
         this.parentDOM = parentDOM;
         this.DOM = null;
@@ -43,9 +44,27 @@ class Figure {
         this.clearAvailableMoves();
     }
 
+    isValidCoordinate(x, y) {
+        return x < 0 ||
+            y < 0 ||
+            x >= this.GAME.boardSize ||
+            y >= this.GAME.boardSize ? false : true;
+    }
+
+    cellContent(x, y) {
+        return this.GAME.figures.filter(figure => figure.x === x && figure.y === y)[0];
+    }
+
+    isEmptyCell(x, y) {
+        return this.cellContent(x, y) ? false : true;
+    }
+
     getAvailableMoves() {
         console.log('Figurai nera aprasyta galimu leistinu ejimu pasieskos funkcija... just do it!');
-        return [];
+        return {
+            free: [],
+            attack: [],
+        };
     }
 
     clearAvailableMoves() {
@@ -80,6 +99,8 @@ class Figure {
 
         this.DOM.style.top = top + '%';
         this.DOM.style.left = left + '%';
+
+        this.moveCount++;
 
         this.clearAvailableMoves();
     }
