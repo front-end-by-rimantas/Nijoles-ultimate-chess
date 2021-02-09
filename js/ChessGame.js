@@ -3,6 +3,8 @@ import { boardPositions } from './boardPositions.js';
 import { Figure } from './figures/Figure.js';
 import { King } from './figures/King.js';
 import { Pawn } from './figures/Pawn.js';
+import { Rook } from './figures/Rook.js';
+import { Bishop } from './figures/Bishop.js';
 
 class ChessGame {
     constructor(params) {
@@ -66,6 +68,12 @@ class ChessGame {
                     break;
                 case 'pawn':
                     this.figures.push(new Pawn(this, figure, this.DOMfigures));
+                    break;
+                case 'rook':
+                    this.figures.push(new Rook(this, figure, this.DOMfigures));
+                    break;
+                case 'bishop':
+                    this.figures.push(new Bishop(this, figure, this.DOMfigures));
                     break;
 
                 default:
